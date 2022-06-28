@@ -91,3 +91,46 @@ public function run()
 ```
 php artisan db:seed
 ```
+
+4.  AdminMiddleware の作成
+
+Adminミドルウェアの作成
+
+```
+php artisan make:middleware AdminMiddleware
+```
+ミドルウェアが生成されたら、以下のように編集
+
+```
+// app\Http\Middleware\AdminMiddleware.php
+
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class AdminMiddleware
+{
+    public function handle(Request $request, Closure $next)
+    {
+        if (!auth()->user() || !auth()->user()->is_admin) {
+            abort(403);
+        }
+        return $next($request);
+    }
+}
+```
+app\Http\Kernel.php を編集
+
+```
+// app\Http\Kernel.php
+
+protected $routeMiddleware = [
+
+    // ...
+
+    'is_admin' => AdminMiddleware::class,
+];
+```

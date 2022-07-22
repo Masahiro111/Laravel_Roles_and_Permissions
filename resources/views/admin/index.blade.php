@@ -4,5 +4,4 @@
             {{ __('admin') }}
         </h2>
     </x-slot>
-    <h1>content</h1>
 </x-admin-layout>

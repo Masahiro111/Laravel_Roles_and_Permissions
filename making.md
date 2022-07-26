@@ -122,6 +122,7 @@ class AdminMiddleware
     }
 }
 ```
+
 app\Http\Kernel.php を編集
 
 ```
@@ -134,3 +135,4 @@ protected $routeMiddleware = [
     'is_admin' => AdminMiddleware::class,
 ];
 ```
+
